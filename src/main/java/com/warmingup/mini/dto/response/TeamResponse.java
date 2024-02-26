@@ -1,4 +1,4 @@
-package com.warmingup.mini.dto;
+package com.warmingup.mini.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,5 +13,5 @@ public class TeamResponse {
 
     private String manager;
 
-    private int memberCount;
+    private long memberCount;
 }

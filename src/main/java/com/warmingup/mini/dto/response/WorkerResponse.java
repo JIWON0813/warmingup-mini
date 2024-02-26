@@ -1,4 +1,4 @@
-package com.warmingup.mini.dto;
+package com.warmingup.mini.dto.response;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
