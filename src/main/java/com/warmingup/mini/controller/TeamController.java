@@ -4,25 +4,24 @@ import com.warmingup.mini.dto.request.TeamCreateRequest;
 import com.warmingup.mini.dto.response.TeamResponse;
 import com.warmingup.mini.service.TeamService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/team")
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/team")
 public class TeamController {
 
     private final TeamService teamService;
 
     @PostMapping("/save")
-    public void save(TeamCreateRequest request){
+    public void save(@RequestBody TeamCreateRequest request){
         teamService.save(request);
     }
 
     @GetMapping("/list")
     public List<TeamResponse> teams(){
-        return null;
+        return teamService.teams();
     }
 }

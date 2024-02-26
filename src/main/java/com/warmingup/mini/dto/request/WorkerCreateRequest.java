@@ -1,6 +1,5 @@
 package com.warmingup.mini.dto.request;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +22,12 @@ public class WorkerCreateRequest {
     private LocalDate workStartDate;
 
     public void isRequireValue(){
-        if(this.name.isEmpty() || this.workStartDate == null || this.birthday == null || !(this.role.equals("MANAGER") && this.role.equals("MEMBER") )){
+        if(this.name.isEmpty() || this.workStartDate == null || this.birthday == null || this.role.isEmpty()){
             throw new IllegalArgumentException("필수 값을 입력해주세요");
+        }
+
+        if(!this.role.equals("MANAGER") && !this.role.equals("MEMBER")){
+            throw new IllegalArgumentException("역할은 MANAGER 또는 MEMBER 여야 합니다.");
         }
     }
 }

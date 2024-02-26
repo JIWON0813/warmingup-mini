@@ -18,7 +18,6 @@ public class TeamService {
 
     private final TeamRepository teamRepository;
 
-    private final WorkerRepository workerRepository;
     @Transactional
     public void save(TeamCreateRequest request){
         request.checkNotNullName();
@@ -26,17 +25,13 @@ public class TeamService {
         teamRepository.save(new Team(request.getName()));
     }
 
-    //TODO... refactoring
     @Transactional(readOnly = true)
     public List<TeamResponse> teams(){
         var teams = teamRepository.findAll();
-        var workers = workerRepository.findAll();
 
-        var result = teams.stream().map(team -> {
-            var manager = workers.stream().filter(worker -> worker.getRole().equals("MANAGER")).findFirst().orElse(null);
-            var count = workers.stream().filter(worker -> worker.getTeamName().equals(team.getName())).count();
-            return new TeamResponse(team.getName(), manager == null ? null : manager.getName(), count);
-        }).collect(Collectors.toList());
+        var result = teams.stream()
+                .map(team -> new TeamResponse(team))
+                .collect(Collectors.toList());
 
         return result;
     }

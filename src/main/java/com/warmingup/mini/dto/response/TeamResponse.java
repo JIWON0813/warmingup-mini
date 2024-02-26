@@ -1,10 +1,9 @@
 package com.warmingup.mini.dto.response;
 
-import lombok.AllArgsConstructor;
+import com.warmingup.mini.domain.Team;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class TeamResponse {
@@ -13,5 +12,11 @@ public class TeamResponse {
 
     private String manager;
 
-    private long memberCount;
+    private int memberCount;
+
+    public TeamResponse(Team team) {
+        this.name = team.getName();
+        this.manager = team.getManager();
+        this.memberCount = team.getWorkersCount();
+    }
 }
